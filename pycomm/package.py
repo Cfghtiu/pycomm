@@ -9,6 +9,10 @@ class Package:
         self.func = func
         self.name = func.__name__
         self.parameters = [para.annotation for para in inspect.signature(func).parameters.values()]
+        if self.parameters[0] != inspect.Parameter.empty:
+            self.struct = Struct(*self.parameters)
+        else:
+            self.struct = None
         self.package_handler = None
         self.__get__ = cache(self.__get__)
 

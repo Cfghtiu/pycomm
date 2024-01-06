@@ -31,7 +31,7 @@ class Connection(PackageSender):
         #     write_func(stream, arg)
 
         # 不需要修改数据时也可以直接这样，这样最快
-        # bound_package.struct.dump(*args, data_stream=stream)
+        # bound_package.struct.dump(*args, stream=stream)
 
         # 发送数据
         self.data = stream.getvalue()
