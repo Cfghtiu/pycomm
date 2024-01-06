@@ -1,4 +1,5 @@
 import inspect
+from typing import Union
 
 from pycomm.Struct import Struct
 from functools import cache
@@ -28,7 +29,9 @@ class Package:
         self.package_handler = handler
         return self
 
-    def __get__(self, instance, owner) -> "BoundPackage":
+    def __get__(self, instance, owner) -> Union["BoundPackage", "Package"]:
+        if instance is None:
+            return self
         return BoundPackage(instance, self)
 
 
@@ -47,7 +50,7 @@ class BoundPackage:
         _instance = self.instance
         _args = args
         _package = self
-        self.package.func(self, *args)
+        self.package.func(self.instance, *args)
 
     def name(self) -> str:
         return self.package.name

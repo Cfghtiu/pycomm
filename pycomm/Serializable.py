@@ -3,8 +3,8 @@ from pycomm.Struct import Struct
 
 
 class Serializable:
-    def __init_subclass__(cls, **kwargs):
-        if hasattr(cls, '__annotations__'):
+    def __init_subclass__(cls, fill=True):
+        if fill:
             cls.struct = Struct(*cls.__annotations__.values())
 
     @classmethod

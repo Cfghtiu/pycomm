@@ -22,6 +22,9 @@ class DataStream(io.BytesIO):
             return getattr(self, "read_" + other.lower())()
         return getattr(self, "read_" + other.__name__.lower())()
 
+    write_bytes = io.BytesIO.write
+    read_bytes = io.BytesIO.read
+
     def write_int(self, value: int):
         self.write(value.to_bytes(4, sys.byteorder))
 
